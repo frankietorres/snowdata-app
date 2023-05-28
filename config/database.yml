@@ -75,7 +75,6 @@ test:
 #
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
   database: snowdata-app_production
   username: snowdata-app
   password: <%= ENV['SNOWDATA-APP_DATABASE_PASSWORD'] %>
