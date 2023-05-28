@@ -1,7 +1,7 @@
 databases:
   - name: snowdata-app
-    databaseName: snowdata-app
-    user: snowdata-app
+    databaseName: snowdata_app
+    user: snowdata_app_user
 
 services:
   - type: web
