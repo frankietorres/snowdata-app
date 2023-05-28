@@ -26,8 +26,10 @@ gem "jbuilder"
 
 gem 'jquery-rails'
 
+gem 'pg'
+
 group :production do
-  gem 'pg' # for Heroku deployment
+  #gem 'pg' # for Render deployment
   gem 'rails_12factor'
 end
 
@@ -56,7 +58,7 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   # Use sqlite3 as the database for Active Record
-  gem "sqlite3", "~> 1.4"
+  #gem "sqlite3", "~> 1.4"
 end
 
 group :development do
