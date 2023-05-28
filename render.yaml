@@ -1,5 +1,5 @@
 databases:
-  - name: snowdata-app
+  - name: snowdata-app-db
     databaseName: snowdata_app
     user: snowdata_app_user
 
