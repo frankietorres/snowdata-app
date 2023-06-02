@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   root 'home#coming_soon'
 
+  get '/resorts', to: 'resorts#index'
+
   # Defines the root path route ("/")
   # root "articles#index"
 end

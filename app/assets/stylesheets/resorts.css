@@ -1,0 +1,13 @@
+.open-status {
+width: 20px;
+height: 20px;
+}
+
+.open-status.open {
+background-color: green;
+}
+
+.open-status.closed {
+background-color: red;
+}
+  

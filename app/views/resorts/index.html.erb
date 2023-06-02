@@ -1,0 +1,24 @@
+<h1>Resorts</h1>
+
+<% @resorts.each do |resort| %>
+  <div class="resort">
+    <h2><%= resort.name %></h2>
+    <div class="open-status <%= resort.status %>"></div>
+    <ul>
+      <% resort.lifts.each do |lift| %>
+        <li>
+          <h3><%= lift.name %></h3>
+          <div class="open-status <%= lift.status %>"></div>
+          <ul>
+            <% lift.trails.each do |trail| %>
+              <li>
+                <h4><%= trail.name %></h4>
+                <div class="open-status <%= trail.status %>"></div>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
