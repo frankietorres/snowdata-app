@@ -95,17 +95,22 @@ namespace :resort do
             
             def upload_to_database
                 @resorts_lifts_trails.each do |resort_name, lifts_and_trails|
-                    resort = Resort.find_or_create_by(name: resort_name)
+                    resort = Resort.find_or_initialize_by(name: resort_name)
+                    resort.save
                     lifts_and_trails.each do |lift_name, lift_data|
-                        lift = resort.lifts.find_or_create_by(name: lift_name)
+                        lift = resort.lifts.find_or_initialize_by(name: lift_name)
                         lift.update(status: lift_data[:status])
+                        lift.save
                         lift_data[:trails].each do |trail_data|
-                            trail = lift.trails.find_or_create_by(name: trail_data[:name])
+                            trail = lift.trails.find_or_initialize_by(name: trail_data[:name])
                             trail.update(status: trail_data[:status])
+                            trail.save
                         end
                     end
                 end
             end
+            
+            
         end
             
         status = ResortStatus.new
