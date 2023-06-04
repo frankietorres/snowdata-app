@@ -6,11 +6,13 @@
             <li>
             <h3><%= lift.name %></h3>
             <div class="open-status <%= lift.status %>"></div>
+            <span class="status-text"><%= lift.status.capitalize %></span>
             <ul>
                 <% lift.trails.each do |trail| %>
                 <li>
                     <span><%= trail.name %></span>
                     <div class="open-status <%= trail.status %>"></div>
+                    <span class="status-text"><%= trail.status.capitalize %></span>
                 </li>
                 <% end %>
             </ul>
@@ -19,4 +21,3 @@
         </ul>
     </div>
 <% end %>
-  

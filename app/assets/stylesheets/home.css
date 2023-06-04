@@ -41,3 +41,10 @@ h1 {
         border-color: transparent;
     }
 }
+
+body.resorts {
+    height: auto;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+}

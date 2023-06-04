@@ -17,36 +17,54 @@ namespace :resort do
 
             def scrape_ArapahoeBasin
                 url = 'https://www.arapahoebasin.com/the-mountain/terrain-status/'
-                data = Nokogiri::HTML(URI.open(url))
                 resort_name = 'Arapahoe Basin'
+                data = Nokogiri::HTML(URI.open(url))
                 lift_and_trails = {}
                 current_lift = nil
-
+            
                 data.css('div.ab-status.ab-status-large').each do |lift|
-                    # Stop the iteration when we reach the unwanted section
                     break if lift.parent[:class] == 'ab-snowReport_uphill'
                     
-                    # Remove any non-text nodes (like SVG) from the lift node
-                    lift.children.each { |c| c.remove if c.name != 'text' }
-                    lift_name = lift.text.strip
-                    lift_status = lift.at_css('svg.status_open') ? 'open' : 'closed'
-                    lift_and_trails[lift_name] = {status: lift_status, trails: []}
+                    lift_name = lift.text.gsub(/\s+/, ' ').strip
+                    lift_name = lift_name.gsub(/.*?(.status_|.level_)*([A-Za-z'’0-9\s().-]+)$/, '\2').split(' .').first.chomp(',').strip
+                    lift_status = lift.at_css('svg.status_open') ? 'open' : (lift.at_css('svg.status_closed') ? 'closed' : 'unknown')
+            
+                    next if lift_name.match(/[A-Za-z]/).nil?
                     
+                    lift_and_trails[lift_name] = {status: lift_status, trails: []}
+            
                     following_sibling = lift.next_element
                     while following_sibling && following_sibling.name == 'button' && following_sibling[:class] == 'ab-status_wrapper'
-                    if following_sibling.at_css('div.ab-status_sub')
-                        following_sibling.css('div.ab-status_sub div.ab-status').each do |trail|
-                        # Remove any non-text nodes (like SVG) from the trail node
-                        trail.children.each { |c| c.remove if c.name != 'text' }
-                        trail_name = trail.text.strip
-                        trail_status = trail.at_css('svg.status_open') ? 'open' : 'closed'
-                        lift_and_trails[lift_name][:trails] << {name: trail_name, status: trail_status}
+                        if following_sibling.at_css('div.ab-status_sub')
+                            following_sibling.css('div.ab-status_sub div.ab-status').each do |trail|
+                                trail_text = trail.inner_text.gsub(/\s+/, ' ').strip
+                                trail_name = trail_text.gsub(/.*?(.status_|.level_)*([A-Za-z'’0-9\s().-]+)$/, '\2').split(' .').first.strip
+                                
+                                if trail_name.start_with? ","
+                                    trail_name = trail_name[1..-1].strip
+                                else
+                                    trail_name = trail_name.chomp(',').strip
+                                end
+            
+                                # Check for the second case of the trail
+                                if trail.at_css('div.ab-status_groomed')
+                                    trail_name = trail.inner_text.strip
+                                    trail_name = trail_name.gsub(/\.[-_a-z0-9]+\{[^\}]+\}/, '')  # remove CSS style declarations
+                                    trail_name = trail_name.strip  # remove leading/trailing whitespaces
+                                end
+            
+                                trail_status = trail.at_css('svg.status_open') ? 'open' : (trail.at_css('svg.status_closed') ? 'closed' : 'unknown')
+                                
+                                next if trail_name.match(/[A-Za-z]/).nil? 
+                                next if trail_name == trail.text 
+                                
+                                lift_and_trails[lift_name][:trails] << {name: trail_name, status: trail_status}
+                            end
                         end
-                    end
-                    following_sibling = following_sibling.next_element
+                        following_sibling = following_sibling.next_element
                     end
                 end
-
+            
                 @resorts_lifts_trails[resort_name] = lift_and_trails
             end
 
