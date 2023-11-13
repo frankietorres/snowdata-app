@@ -1,0 +1,11 @@
+<header class="app-header navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <div class="container">
+    <%= link_to 'snowdata.app', root_path, class: 'app-title' %>
+    <% if user_signed_in? %>
+      <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'app-link' %>
+    <% else %>
+      <%= link_to 'Login', new_user_session_path, class: 'app-link' %>
+      <%= link_to 'Register', new_user_registration_path, class: 'app-link' %>
+    <% end %>
+  </div>
+</header>

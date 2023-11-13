@@ -4,43 +4,10 @@ body {
     color: white;
     height: 100vh;
     margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
     text-align: center;
 }
 
-h1 {
-    font-size: 3em;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: .15em solid white; 
-    width: 14ch;  /* Adjusted width to accommodate for the additional dot */
-    animation: typing 1s steps(14, end),  /* Adjusted steps to accommodate for the additional dot and reduced time for faster typing */
-               blink-caret .75s step-end infinite,
-               hide-cursor 0.5s 1s forwards;  /* Reduced delay time for faster typing */
-}
-
-@keyframes typing {
-    from { 
-        width: 0;
-    }
-    to { 
-        width: 14ch;  /* Adjusted width to accommodate for the additional dot */
-    }
-}
-
-@keyframes blink-caret {
-    50% { 
-        border-color: transparent;
-    }
-}
-
-@keyframes hide-cursor {
-    to {
-        border-color: transparent;
-    }
-}
 
 body.resorts {
     height: auto;
