@@ -1,11 +1,41 @@
-<header class="app-header navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+<!--
+
+<header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow">
   <div class="container">
-    <%= link_to 'snowdata.app', root_path, class: 'app-title' %>
+    <%= link_to 'snowdata.app', root_path, class: 'navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white' %>
     <% if user_signed_in? %>
       <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'app-link' %>
     <% else %>
       <%= link_to 'Login', new_user_session_path, class: 'app-link' %>
       <%= link_to 'Register', new_user_registration_path, class: 'app-link' %>
     <% end %>
+  </div>
+</header>
+
+-->
+
+
+<header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark" style="">
+  <%= link_to 'snowdata.app', root_path, class: 'navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white' %>
+
+  <!--
+
+  <ul class="navbar-nav flex-row d-md-none">
+    <li class="nav-item text-nowrap">
+      <button class="nav-link px-3 text-white collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSearch" aria-controls="navbarSearch" aria-expanded="false" aria-label="Toggle search">
+        <svg class="bi"><use xlink:href="#search"></use></svg>
+      </button>
+    </li>
+    <li class="nav-item text-nowrap">
+      <button class="nav-link px-3 text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <svg class="bi"><use xlink:href="#list"></use></svg>
+      </button>
+    </li>
+  </ul>
+
+  -->
+
+  <div id="navbarSearch" class="navbar-search w-100 collapse" style="">
+    <input class="form-control w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
   </div>
 </header>
