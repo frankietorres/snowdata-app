@@ -34,6 +34,9 @@ gem 'jquery-rails'
 
 gem 'devise'
 
+gem "chartkick"
+gem "groupdate"
+
 #gem 'pg'
 
 group :production do
