@@ -6,15 +6,15 @@
       <tr>
         <th>Date</th>
         <th>Time</th>
-        <th>Temperature</th>
-        <th>Max Temperature</th>
-        <th>Min Temperature</th>
-        <th>Wind Speed</th>
-        <th>Wind Direction</th>
-        <th>Wind Gust Speed</th>
-        <th>Melted Precipitation (1hr)</th>
-        <th>Snow Height</th>
-        <th>Snow Water Equivalent</th>
+        <th>Temp</th>
+        <th>MxTp</th>
+        <th>MnTp</th>
+        <th>Wind Spd</th>
+        <th>Wind Dir</th>
+        <th>Gust Spd</th>
+        <th>Pcp1</th>
+        <th>Snow Depth</th>
+        <th>SWE</th>
         <!-- Add more headers as needed -->
       </tr>
     </thead>
@@ -37,6 +37,11 @@
       <% end %>
     </tbody>
   </table>
+
+
+  <%= link_to 'Temperature Chart', temperature_chart_path(@station.name) %>
+
+
 <% else %>
   <p>No observations available for this station.</p>
 <% end %>

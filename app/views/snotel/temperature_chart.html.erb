@@ -1,0 +1,2 @@
+<h1><%= @station.name %> Temperature Chart</h1>
+<%= line_chart @observations, discrete: true, height: '400px', xtitle: 'Time', ytitle: 'Temperature (°C)' %>

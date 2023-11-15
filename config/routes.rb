@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   get 'snotel', to: 'snotel#index', as: :snotel_index
   get 'snotel/:station_name', to: 'snotel#show', as: :snotel_station
 
+  get 'snotel/:station_name/temperature_chart', to: 'snotel#temperature_chart', as: 'temperature_chart'
+
 end

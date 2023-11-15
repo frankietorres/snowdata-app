@@ -1,6 +1,6 @@
 class SnotelController < ApplicationController
 
-    before_action :find_station, only: [:show]
+    before_action :find_station, only: [:show, :temperature_chart]
 
     def index
         @stations = SnotelWeatherStation.all
@@ -19,7 +19,17 @@ class SnotelController < ApplicationController
     private
 
     def find_station
-        @station = SnotelWeatherStation.find_by("LOWER(name) = ?", params[:station_name].downcase)
+        @station = SnotelWeatherStation.find_by(name: params[:station_name])
     end
+
+    def temperature_chart
+        @observations = @station&.snotel_weather_observations&.order(:time)
+    
+        if @observations.blank?
+          flash[:alert] = "No observations found for the station."
+          redirect_to snotel_index_path
+        end
+    end
+
 end
   
