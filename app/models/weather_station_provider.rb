@@ -1,2 +1,0 @@
-class WeatherStationProvider < ApplicationRecord
-end
