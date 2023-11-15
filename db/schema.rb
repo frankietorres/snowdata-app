@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_08_025206) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_14_233320) do
   create_table "lifts", force: :cascade do |t|
     t.string "name"
     t.string "status"
@@ -24,6 +24,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_025206) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "snotel_providers", force: :cascade do |t|
+    t.integer "weather_station_provider_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["weather_station_provider_id"], name: "index_snotel_providers_on_weather_station_provider_id"
   end
 
   create_table "trails", force: :cascade do |t|
@@ -47,6 +54,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_025206) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "weather_station_providers", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "lifts", "resorts"
+  add_foreign_key "snotel_providers", "weather_station_providers"
   add_foreign_key "trails", "lifts"
 end

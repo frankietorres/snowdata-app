@@ -1,0 +1,2 @@
+class WeatherStationProvider < ApplicationRecord
+end
