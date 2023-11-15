@@ -1,7 +1,42 @@
+<h1><%= @station.name %> Observations</h1>
 
-<h1><%= @station.name %></h1>
-
-<!-- Display observations data here -->
-<% @observations.each do |observation| %>
-  <!-- Display individual observation data -->
+<% if @observations.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Temperature</th>
+        <th>Max Temperature</th>
+        <th>Min Temperature</th>
+        <th>Wind Speed</th>
+        <th>Wind Direction</th>
+        <th>Wind Gust Speed</th>
+        <th>Melted Precipitation (1hr)</th>
+        <th>Snow Height</th>
+        <th>Snow Water Equivalent</th>
+        <!-- Add more headers as needed -->
+      </tr>
+    </thead>
+    <tbody>
+      <% @observations.each do |observation| %>
+        <tr>
+          <td><%= observation.date %></td>
+          <td><%= observation.time %></td>
+          <td><%= observation.temp %></td>
+          <td><%= observation.max_temp %></td>
+          <td><%= observation.min_temp %></td>
+          <td><%= observation.wind_speed %></td>
+          <td><%= observation.wind_direction %></td>
+          <td><%= observation.wind_gust_speed %></td>
+          <td><%= observation.melted_precipitation_1hr %></td>
+          <td><%= observation.snow_height %></td>
+          <td><%= observation.snow_water_equivalent %></td>
+          <!-- Add more cells as needed -->
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No observations available for this station.</p>
 <% end %>

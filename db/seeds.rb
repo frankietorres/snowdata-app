@@ -8,8 +8,8 @@
 
 
 # Create a test weather station
-weather_station = SnotelWeatherStation.create(name: "Test Station1", elevation: 500)
-weather_station2 = SnotelWeatherStation.create(name: "Test Station2", elevation: 1000)
+weather_station = SnotelWeatherStation.create(name: "test-station1", elevation: 500)
+weather_station2 = SnotelWeatherStation.create(name: "test-station2", elevation: 1000)
 
 # Create some test weather observations associated with the test weather station
 observation1 = weather_station.snotel_weather_observations.create!(
