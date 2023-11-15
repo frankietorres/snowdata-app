@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_14_233320) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_15_003653) do
   create_table "lifts", force: :cascade do |t|
     t.string "name"
     t.string "status"
@@ -31,6 +31,31 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_14_233320) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["weather_station_provider_id"], name: "index_snotel_providers_on_weather_station_provider_id"
+  end
+
+  create_table "snotel_weather_observations", force: :cascade do |t|
+    t.date "date"
+    t.time "time"
+    t.float "temp"
+    t.float "max_temp"
+    t.float "min_temp"
+    t.float "wind_speed"
+    t.integer "wind_direction"
+    t.float "wind_gust_speed"
+    t.float "melted_precipitation_1hr"
+    t.float "snow_height"
+    t.float "snow_water_equivalent"
+    t.integer "snotel_weather_station_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["snotel_weather_station_id"], name: "index_snotel_weather_observations_on_snotel_weather_station_id"
+  end
+
+  create_table "snotel_weather_stations", force: :cascade do |t|
+    t.string "name"
+    t.float "elevation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "trails", force: :cascade do |t|
@@ -62,5 +87,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_14_233320) do
 
   add_foreign_key "lifts", "resorts"
   add_foreign_key "snotel_providers", "weather_station_providers"
+  add_foreign_key "snotel_weather_observations", "snotel_weather_stations"
   add_foreign_key "trails", "lifts"
 end
