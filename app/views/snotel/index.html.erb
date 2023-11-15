@@ -1,0 +1,9 @@
+<h1>Snotel Weather Stations</h1>
+
+<ul>
+  <% @stations.each do |station| %>
+    <li>
+      <%= link_to station.name, snotel_station_path(station.name.parameterize) %>
+    </li>
+  <% end %>
+</ul>

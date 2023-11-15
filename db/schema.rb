@@ -26,13 +26,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_15_003653) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "snotel_providers", force: :cascade do |t|
-    t.integer "weather_station_provider_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["weather_station_provider_id"], name: "index_snotel_providers_on_weather_station_provider_id"
-  end
-
   create_table "snotel_weather_observations", force: :cascade do |t|
     t.date "date"
     t.time "time"
@@ -45,10 +38,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_15_003653) do
     t.float "melted_precipitation_1hr"
     t.float "snow_height"
     t.float "snow_water_equivalent"
-    t.integer "snotel_weather_station_id", null: false
+    t.string "snotel_weather_station_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["snotel_weather_station_id"], name: "index_snotel_weather_observations_on_snotel_weather_station_id"
   end
 
   create_table "snotel_weather_stations", force: :cascade do |t|
@@ -79,14 +71,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_15_003653) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "weather_station_providers", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   add_foreign_key "lifts", "resorts"
-  add_foreign_key "snotel_providers", "weather_station_providers"
-  add_foreign_key "snotel_weather_observations", "snotel_weather_stations"
   add_foreign_key "trails", "lifts"
 end

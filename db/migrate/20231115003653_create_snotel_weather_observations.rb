@@ -12,7 +12,7 @@ class CreateSnotelWeatherObservations < ActiveRecord::Migration[7.0]
       t.float :melted_precipitation_1hr
       t.float :snow_height
       t.float :snow_water_equivalent
-      t.references :snotel_weather_station, null: false, foreign_key: true
+      t.string :snotel_weather_station_id, null: false
 
       t.timestamps
     end
