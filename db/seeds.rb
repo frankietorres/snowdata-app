@@ -40,5 +40,33 @@ observation2 = weather_station2.snotel_weather_observations.create!(
   snow_water_equivalent: 4.0,
 )
 
+observation3 = weather_station2.snotel_weather_observations.create!(
+  date: Date.yesterday,
+  time: Time.now - 2.hour,
+  temp: 34.0,
+  max_temp: 32.0,
+  min_temp: 28.0,
+  wind_speed: 12.0,
+  wind_direction: 200,
+  wind_gust_speed: 18.0,
+  melted_precipitation_1hr: 0.2,
+  snow_height: 10.0,
+  snow_water_equivalent: 4.0,
+)
+
+observation4 = weather_station2.snotel_weather_observations.create!(
+  date: Date.yesterday,
+  time: Time.now - 3.hour,
+  temp: 34.0,
+  max_temp: 32.0,
+  min_temp: 28.0,
+  wind_speed: 12.0,
+  wind_direction: 200,
+  wind_gust_speed: 18.0,
+  melted_precipitation_1hr: 0.2,
+  snow_height: 10.0,
+  snow_water_equivalent: 4.0,
+)
+
 puts "Observation 1: #{observation1.inspect}"
 puts "Observation 2: #{observation2.inspect}"

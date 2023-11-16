@@ -48,4 +48,4 @@
     })
   })()
   
-  window.sayHi = sayHi;  // You must have this to expose your functions
+  //window.sayHi = sayHi;  // You must have this to expose your functions

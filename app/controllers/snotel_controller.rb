@@ -16,12 +16,6 @@ class SnotelController < ApplicationController
         end
     end
 
-    private
-
-    def find_station
-        @station = SnotelWeatherStation.find_by(name: params[:station_name])
-    end
-
     def temperature_chart
         @observations = @station&.snotel_weather_observations&.order(:time)
     
@@ -31,5 +25,10 @@ class SnotelController < ApplicationController
         end
     end
 
+    private
+
+    def find_station
+        @station = SnotelWeatherStation.find_by(name: params[:station_name])
+    end
 end
   

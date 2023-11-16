@@ -1,2 +1,8 @@
 <h1><%= @station.name %> Temperature Chart</h1>
-<%= line_chart @observations, discrete: true, height: '400px', xtitle: 'Time', ytitle: 'Temperature (°C)' %>
+
+<% if @observations.present? %>
+  <% chart_data = @observations.map { |obs| [obs[:time], obs[:temp]] } %>
+  <%= line_chart chart_data, discrete: true, height: '400px', xtitle: 'Time', ytitle: 'Temperature (°F)' %>
+<% else %>
+  <p>No observations found for the station.</p>
+<% end %>
