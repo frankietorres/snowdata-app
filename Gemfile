@@ -37,6 +37,8 @@ gem 'devise'
 gem "chartkick"
 gem "groupdate"
 
+gem 'csv'
+
 #gem 'pg'
 
 group :production do
