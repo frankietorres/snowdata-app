@@ -1,0 +1,12 @@
+<svg class="attribute-graph" height="100" width="100%">
+  <% observations.each_with_index do |observation, index| %>
+    <% value = observation.send(attribute) %>
+    <% height = calculate_height(value) %>
+    <% color = calculate_color(value) %>
+    <rect x="<%= index * (100.0 / observations.count) %>%" 
+          y="<%= 100 - height %>" 
+          width="<%= 100.0 / observations.count %>%" 
+          height="<%= height %>" 
+          fill="<%= color %>" />
+  <% end %>
+</svg>
