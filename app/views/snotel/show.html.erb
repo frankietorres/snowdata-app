@@ -1,6 +1,18 @@
 <h1><%= @station.name %> Observations</h1>
 
 <% if @observations.any? %>
+
+  <div class="graphs-container">
+    <% attributes = %w[temp max_temp min_temp wind_speed wind_direction wind_gust_speed melted_precipitation_1hr snow_height snow_water_equivalent] %>
+
+    <% attributes.each do |attribute| %>
+      <div class="graph-section">
+        <h3><%= attribute.titleize %></h3>
+        <%= render 'graph', observations: @observations, attribute: attribute %>
+      </div>
+    <% end %>
+  </div>
+
   <table>
     <thead>
       <tr>
