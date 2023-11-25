@@ -7,66 +7,42 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 
-# Create a test weather station
-weather_station = SnotelWeatherStation.create(name: "test-station1", elevation: 500)
-weather_station2 = SnotelWeatherStation.create(name: "test-station2", elevation: 1000)
+# Constants for generating random weather data
+TEMP_RANGE = (20..40) # Temperature range in degrees
+WIND_SPEED_RANGE = (5..20) # Wind speed range in mph
+WIND_DIRECTION_RANGE = (0..360) # Wind direction range in degrees
+PRECIPITATION_RANGE = (0.0..1.0) # Precipitation range in inches
+SNOW_HEIGHT_RANGE = (0..30) # Snow height range in inches
+SNOW_WATER_EQUIVALENT_RANGE = (0.0..10.0) # Snow water equivalent range in inches
 
-# Create some test weather observations associated with the test weather station
-observation1 = weather_station.snotel_weather_observations.create!(
-  date: Date.today,
-  time: Time.now,
-  temp: 32.5,
-  max_temp: 35.0,
-  min_temp: 30.0,
-  wind_speed: 10.0,
-  wind_direction: 180,
-  wind_gust_speed: 15.0,
-  melted_precipitation_1hr: 0.1,
-  snow_height: 12.0,
-  snow_water_equivalent: 5.0,
-)
+# Helper method to generate random weather data
+def random_weather_data
+  {
+    temp: rand(TEMP_RANGE),
+    max_temp: rand(TEMP_RANGE),
+    min_temp: rand(TEMP_RANGE),
+    wind_speed: rand(WIND_SPEED_RANGE),
+    wind_direction: rand(WIND_DIRECTION_RANGE),
+    wind_gust_speed: rand(WIND_SPEED_RANGE),
+    melted_precipitation_1hr: rand(PRECIPITATION_RANGE),
+    snow_height: rand(SNOW_HEIGHT_RANGE),
+    snow_water_equivalent: rand(SNOW_WATER_EQUIVALENT_RANGE)
+  }
+end
 
-observation2 = weather_station2.snotel_weather_observations.create!(
-  date: Date.yesterday,
-  time: Time.now - 1.hour,
-  temp: 30.0,
-  max_temp: 32.0,
-  min_temp: 28.0,
-  wind_speed: 12.0,
-  wind_direction: 200,
-  wind_gust_speed: 18.0,
-  melted_precipitation_1hr: 0.2,
-  snow_height: 10.0,
-  snow_water_equivalent: 4.0,
-)
+# Create test weather stations
+weather_station1 = SnotelWeatherStation.find_or_create_by(name: "test-station1", elevation: 500)
+weather_station2 = SnotelWeatherStation.find_or_create_by(name: "test-station2", elevation: 1000)
 
-observation3 = weather_station2.snotel_weather_observations.create!(
-  date: Date.yesterday,
-  time: Time.now - 2.hour,
-  temp: 34.0,
-  max_temp: 32.0,
-  min_temp: 28.0,
-  wind_speed: 12.0,
-  wind_direction: 200,
-  wind_gust_speed: 18.0,
-  melted_precipitation_1hr: 0.2,
-  snow_height: 10.0,
-  snow_water_equivalent: 4.0,
-)
+# Generate observations for 30 days, each day has 24 observations (hourly)
+(1..30).each do |day|
+  (0..23).each do |hour|
+    [weather_station1, weather_station2].each do |station|
+      observation_time = Time.now.midnight + (day-1).days + hour.hours
+      weather_data = random_weather_data.merge(date: observation_time.to_date, time: observation_time)
+      station.snotel_weather_observations.create!(weather_data)
+    end
+  end
+end
 
-observation4 = weather_station2.snotel_weather_observations.create!(
-  date: Date.yesterday,
-  time: Time.now - 3.hour,
-  temp: 34.0,
-  max_temp: 32.0,
-  min_temp: 28.0,
-  wind_speed: 12.0,
-  wind_direction: 200,
-  wind_gust_speed: 18.0,
-  melted_precipitation_1hr: 0.2,
-  snow_height: 10.0,
-  snow_water_equivalent: 4.0,
-)
-
-puts "Observation 1: #{observation1.inspect}"
-puts "Observation 2: #{observation2.inspect}"
+puts "Generated weather observations for 30 days."
