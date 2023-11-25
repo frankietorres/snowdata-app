@@ -1,0 +1,26 @@
+.graphs-container {
+    width: 80%; /* Adjust as needed */
+    margin: 0 auto; /* Center the container */
+    padding: 20px;
+    overflow-y: auto; /* Scroll vertically if needed */
+  }
+  
+.svg-container {
+    width: 100%;
+    max-width: 100%; /* Adjust this as per your layout */
+    overflow-x: auto; /* Allows horizontal scrolling if needed */
+  }
+
+.graph-section {
+    border: 1px solid #ccc; /* Adds a border */
+    padding: 15px; /* Space inside each graph container */
+    margin-bottom: 30px; /* Space between graph containers */
+    background-color: #f9f9f9; /* Optional: Adds a background color */
+}
+  
+.attribute-graph {
+    width: 100%; /* SVG fills the width of its container */
+    height: 100px; /* Adjust the height as needed */
+  }
+  
+  
